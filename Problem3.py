@@ -1,17 +1,19 @@
-function lengthOfLongestSubstring(s: string): number {
-    let maxLen = 0;
-    let left = 0;
-    const set = new Set<string>();
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        char_set = set()
+        left = 0
+        max_len = 0
 
-    for (let right = 0; right < s.length; right++) {
-        while (set.has(s[right])) {
-            set.delete(s[left]);
-            left++;
-        }
+        for right in range(len(s)):
+            while s[right] in char_set:
+                char_set.remove(s[left])
+                left += 1
 
-        set.add(s[right]);
-        maxLen = Math.max(maxLen, right - left + 1);
-    }
+            char_set.add(s[right])
+            max_len = max(max_len, right - left + 1)
 
-    return maxLen;
-};
+        return max_len
